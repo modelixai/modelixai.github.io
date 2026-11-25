@@ -1,0 +1,31 @@
+---
+import { TRANSLATIONS, getLocalizedPath, type LocaleCode } from '../i18n/translations';
+
+interface Props {
+  locale: LocaleCode;
+  currentLabel: string;
+}
+
+const { locale, currentLabel } = Astro.props;
+const t = TRANSLATIONS[locale];
+const homeHref = getLocalizedPath(locale, '');
+---
+
+<nav aria-label="Breadcrumb" class="mb-6">
+  <ol class="flex flex-wrap items-center gap-2 text-sm text-txt-secondary">
+    <li>
+      <a
+        href={homeHref}
+        class="inline-flex items-center gap-1.5 rounded-md py-1 font-medium text-txt-secondary transition-colors hover:text-accent"
+      >
+        {t.nav.home}
+      </a>
+    </li>
+    <li aria-hidden="true" class="select-none text-txt-secondary/60">/</li>
+    <li>
+      <span aria-current="page" class="font-semibold text-txt-primary">
+        {currentLabel}
+      </span>
+    </li>
+  </ol>
+</nav>

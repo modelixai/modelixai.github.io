@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://modelixai.github.io/sitemap.xml

@@ -1,0 +1,122 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ModelViewerIsland from '../ModelViewerIsland';
+import { TRANSLATIONS, getCanonicalUrl, type LocaleCode } from '../../i18n/translations';
+
+interface Props {
+  locale: LocaleCode;
+}
+
+const { locale } = Astro.props;
+const t = TRANSLATIONS[locale];
+const canonicalUrl = getCanonicalUrl(locale, '');
+
+const webAppSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'ModelixAI — Interactive 3D Model Viewer & GLB/STL Inspector',
+  url: canonicalUrl,
+  inLanguage: locale,
+  applicationCategory: 'DesignApplication',
+  operatingSystem: 'Any (Browser WebGL)',
+  browserRequirements: 'Requires HTML5 Canvas and WebGL',
+  description: t.home.metaDescription,
+  featureList: [
+    '100% local browser WebGL & Three.js execution with zero server uploads',
+    'Open and inspect .glb, .gltf, .obj, and .stl 3D models',
+    'Multi-file companion buffer and texture mapping (.gltf + .bin, .obj + .mtl)',
+    'Live polygon/triangle, vertex, mesh, material, and bounding-box inspector',
+    'Wireframe topology overlay, studio lighting presets, and animation timeline playback',
+    'One-click alpha-channel transparent PNG snapshot export',
+  ],
+  supportingData: '.glb, .gltf, .obj, .stl',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+  },
+  creator: {
+    '@type': 'Person',
+    name: 'Kishara Dilshan',
+  },
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: t.home.faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.answer,
+    },
+  })),
+};
+---
+
+<BaseLayout
+  locale={locale}
+  pagePath=""
+  title={t.home.title}
+  description={t.home.metaDescription}
+  schemas={[webAppSchema, faqSchema]}
+>
+  <!-- Above-the-fold Hero Workspace -->
+  <section class="mx-auto max-w-7xl px-4 pt-6 pb-12 sm:px-6 sm:pt-8">
+    <div class="mx-auto max-w-4xl text-center">
+      <h1 class="text-2xl font-extrabold tracking-tight text-txt-primary sm:text-3xl lg:text-4xl">
+        {t.home.h1}
+      </h1>
+      <p class="mx-auto mt-3 max-w-3xl text-sm leading-relaxed text-txt-secondary sm:text-base">
+        {t.home.heroSubtitle}
+      </p>
+    </div>
+
+    <div class="mt-6">
+      <ModelViewerIsland client:load t={t.viewer} />
+    </div>
+  </section>
+
+  <!-- Studio Capabilities Overview -->
+  <section class="border-t border-line bg-subtle/30 py-14">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <h2 class="text-center text-xl font-bold tracking-tight text-txt-primary sm:text-2xl">
+        {t.home.highlightsHeading}
+      </h2>
+      <div class="mt-8 grid grid-cols-1 gap-6 md:grid-cols-3">
+        {
+          t.home.highlights.map((item) => (
+            <div class="rounded-2xl border border-line bg-card p-6 shadow-sm transition-colors">
+              <h3 class="text-base font-bold text-txt-primary">{item.title}</h3>
+              <p class="mt-2.5 text-sm leading-relaxed text-txt-secondary">{item.description}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Below-the-fold Helpful FAQ Section -->
+  <section aria-labelledby="faq-heading" class="mx-auto max-w-4xl px-4 py-14 sm:px-6">
+    <div class="text-center">
+      <h2 id="faq-heading" class="text-2xl font-bold tracking-tight text-txt-primary sm:text-3xl">
+        {t.home.faqHeading}
+      </h2>
+      <p class="mt-2 text-sm text-txt-secondary sm:text-base">
+        {t.home.faqSubheading}
+      </p>
+    </div>
+
+    <div class="mt-8 space-y-4">
+      {
+        t.home.faqs.map((faq) => (
+          <article class="rounded-2xl border border-line bg-card p-6 shadow-sm">
+            <h3 class="text-base font-bold text-txt-primary sm:text-lg">{faq.question}</h3>
+            <p class="mt-2.5 text-sm leading-relaxed text-txt-secondary sm:text-base">{faq.answer}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,405 @@
+---
+import {
+  SUPPORTED_LANGUAGES,
+  TRANSLATIONS,
+  getLocalizedPath,
+  type LocaleCode,
+} from '../i18n/translations';
+
+interface Props {
+  locale: LocaleCode;
+  pagePath: '' | 'how-to-use/' | 'hire-me/';
+}
+
+const { locale, pagePath } = Astro.props;
+const t = TRANSLATIONS[locale];
+
+const homeHref = getLocalizedPath(locale, '');
+const howToHref = getLocalizedPath(locale, 'how-to-use/');
+const hireMeHref = getLocalizedPath(locale, 'hire-me/');
+
+const isHome = pagePath === '';
+const isHowTo = pagePath === 'how-to-use/';
+const isHireMe = pagePath === 'hire-me/';
+---
+
+<header class="sticky top-0 z-40 w-full border-b border-line bg-card/95 backdrop-blur-md transition-colors duration-200">
+  <nav
+    aria-label="Primary"
+    class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-1 px-2 py-1.5 sm:px-4 lg:flex-nowrap lg:gap-1.5 lg:px-6"
+  >
+    <!-- Left group: Brand Logo + Primary Navigation -->
+    <div class="flex items-center gap-1 lg:gap-1.5">
+      <a
+        href={homeHref}
+        aria-label={t.nav.brandAria}
+        class="group inline-flex min-h-[48px] min-w-[48px] items-center justify-center gap-2.5 rounded-xl px-2 text-txt-primary transition-all duration-200 ease-studio hover:bg-subtle lg:px-3"
+      >
+        <svg
+          class="h-7 w-7 shrink-0 text-accent transition-transform duration-300 ease-studio group-hover:scale-105"
+          viewBox="0 0 32 32"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M16 3L28 9.928v12.144L16 29 4 22.072V9.928L16 3z"
+            stroke="currentColor"
+            stroke-width="2.2"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M16 3v13m0 0l12-6.072M16 16L4 9.928M16 16v13"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <circle cx="16" cy="16" r="2.5" fill="currentColor" />
+        </svg>
+        <span class="hidden text-base font-bold tracking-tight text-txt-primary lg:inline">
+          Modelix<span class="text-accent">AI</span>
+        </span>
+      </a>
+
+      <div class="h-6 w-px bg-line hidden sm:block" aria-hidden="true"></div>
+
+      <!-- Home -->
+      <a
+        href={homeHref}
+        aria-label={t.nav.home}
+        aria-current={isHome ? 'page' : undefined}
+        class:list={[
+          'inline-flex min-h-[48px] min-w-[48px] items-center justify-center gap-2 rounded-xl px-2.5 text-sm font-medium transition-all duration-200 ease-studio lg:px-3',
+          isHome
+            ? 'bg-accent text-accent-contrast shadow-sm'
+            : 'text-txt-secondary hover:bg-subtle hover:text-txt-primary',
+        ]}
+      >
+        <svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 10.5L12 3l9 7.5V20a1 1 0 01-1 1h-5.5v-6h-5v6H4a1 1 0 01-1-1v-9.5z" />
+        </svg>
+        <span class="hidden whitespace-nowrap lg:inline">{t.nav.home}</span>
+      </a>
+
+      <!-- How to Use -->
+      <a
+        href={howToHref}
+        aria-label={t.nav.howToUse}
+        aria-current={isHowTo ? 'page' : undefined}
+        class:list={[
+          'inline-flex min-h-[48px] min-w-[48px] items-center justify-center gap-2 rounded-xl px-2.5 text-sm font-medium transition-all duration-200 ease-studio lg:px-3',
+          isHowTo
+            ? 'bg-accent text-accent-contrast shadow-sm'
+            : 'text-txt-secondary hover:bg-subtle hover:text-txt-primary',
+        ]}
+      >
+        <svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+        </svg>
+        <span class="hidden whitespace-nowrap lg:inline">{t.nav.howToUse}</span>
+      </a>
+
+      <!-- Hire Me -->
+      <a
+        href={hireMeHref}
+        aria-label={t.nav.hireMe}
+        aria-current={isHireMe ? 'page' : undefined}
+        class:list={[
+          'inline-flex min-h-[48px] min-w-[48px] items-center justify-center gap-2 rounded-xl px-2.5 text-sm font-medium transition-all duration-200 ease-studio lg:px-3',
+          isHireMe
+            ? 'bg-accent text-accent-contrast shadow-sm'
+            : 'text-txt-secondary hover:bg-subtle hover:text-txt-primary',
+        ]}
+      >
+        <svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2zM16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" />
+        </svg>
+        <span class="hidden whitespace-nowrap lg:inline">{t.nav.hireMe}</span>
+      </a>
+    </div>
+
+    <!-- Right group: Language, Theme, PWA Install, Support, GitHub -->
+    <div class="flex items-center gap-1 lg:gap-1.5">
+      <!-- 8-Language Selector -->
+      <div class="relative" id="lang-dropdown-root">
+        <button
+          type="button"
+          id="lang-menu-btn"
+          aria-label={t.nav.languageAria}
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-controls="lang-menu-list"
+          class="inline-flex min-h-[48px] min-w-[48px] items-center justify-center gap-1.5 rounded-xl border border-transparent px-2.5 text-sm font-medium text-txt-secondary transition-all duration-200 ease-studio hover:border-line hover:bg-subtle hover:text-txt-primary lg:px-3"
+        >
+          <svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="9" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.6 9h16.8M3.6 15h16.8M12 3a14.5 14.5 0 000 18M12 3a14.5 14.5 0 010 18" />
+          </svg>
+          <span class="hidden uppercase tracking-wide lg:inline">{locale}</span>
+          <svg class="hidden h-3.5 w-3.5 opacity-75 lg:inline" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+          </svg>
+        </button>
+
+        <div
+          id="lang-menu-list"
+          role="menu"
+          aria-label={t.nav.languageAria}
+          class=" invisible opacity-0 pointer-events-none absolute right-0 mt-1.5 w-44 origin-top-right rounded-xl border border-line bg-card p-1.5 shadow-xl transition-all duration-150 ease-studio z-50"
+        >
+          {
+            SUPPORTED_LANGUAGES.map((lang) => {
+              const active = lang.code === locale;
+              return (
+                <a
+                  href={getLocalizedPath(lang.code, pagePath)}
+                  hreflang={lang.code}
+                  lang={lang.code}
+                  role="menuitem"
+                  class:list={[
+                    'flex min-h-[42px] items-center justify-between rounded-lg px-3 py-2 text-sm font-medium transition-colors',
+                    active
+                      ? 'bg-accent text-accent-contrast'
+                      : 'text-txt-primary hover:bg-subtle',
+                  ]}
+                >
+                  <span>{lang.label}</span>
+                  <span class="text-xs uppercase opacity-80">{lang.code}</span>
+                </a>
+              );
+            })
+          }
+        </div>
+      </div>
+
+      <!-- Light/Dark Mode Toggle -->
+      <button
+        type="button"
+        id="theme-toggle-btn"
+        aria-label={t.nav.themeToggleDarkAria}
+        aria-pressed="false"
+        data-light-label={t.nav.themeToggleLightAria}
+        data-dark-label={t.nav.themeToggleDarkAria}
+        class="inline-flex min-h-[48px] min-w-[48px] items-center justify-center rounded-xl border border-transparent text-txt-secondary transition-all duration-200 ease-studio hover:border-line hover:bg-subtle hover:text-txt-primary"
+      >
+        <!-- Sun shown in dark mode -->
+        <svg class="hidden h-5 w-5 dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <circle cx="12" cy="12" r="4" />
+          <path stroke-linecap="round" d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41" />
+        </svg>
+        <!-- Moon shown in light mode -->
+        <svg class="block h-5 w-5 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+        </svg>
+      </button>
+
+      <!-- Add to Home Screen (Offline PWA Install) -->
+      <button
+        type="button"
+        id="pwa-install-btn"
+        aria-label={t.nav.installPwaAria}
+        class="inline-flex min-h-[48px] min-w-[48px] items-center justify-center gap-1.5 rounded-xl border border-line bg-subtle/60 px-2.5 text-xs font-semibold text-txt-primary transition-all duration-200 ease-studio hover:border-accent hover:bg-subtle lg:px-3 xl:text-sm"
+      >
+        <svg class="h-5 w-5 shrink-0 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <rect x="5" y="2" width="14" height="20" rx="2.5" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v6m-3-3h6M9 19h6" />
+        </svg>
+        <span class="hidden whitespace-nowrap lg:inline">{t.nav.installPwa}</span>
+      </button>
+
+      <!-- Support the Developer -->
+      <a
+        href="https://kisharadilshan.gumroad.com/coffee"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={t.nav.supportDevAria}
+        class="inline-flex min-h-[48px] min-w-[48px] items-center justify-center gap-1.5 rounded-xl border border-line bg-card px-2.5 text-xs font-semibold text-txt-primary transition-all duration-200 ease-studio hover:border-accent hover:bg-subtle lg:px-3 xl:text-sm"
+      >
+        <svg class="h-5 w-5 shrink-0 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17 8h1a4 4 0 110 8h-1M3 8h14v7a4 4 0 01-4 4H7a4 4 0 01-4-4V8zm3 13h8" />
+        </svg>
+        <span class="hidden whitespace-nowrap lg:inline">{t.nav.supportDev}</span>
+      </a>
+
+      <!-- GitHub Repository Link (Git icon ONLY) -->
+      <a
+        href="https://github.com/modelixai/modelixai.github.io"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="View source code on GitHub"
+        class="inline-flex min-h-[48px] min-w-[48px] items-center justify-center rounded-xl border border-transparent text-txt-secondary transition-all duration-200 ease-studio hover:border-line hover:bg-subtle hover:text-txt-primary"
+      >
+        <svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+          />
+        </svg>
+      </a>
+    </div>
+  </nav>
+</header>
+
+<!-- Offline PWA Install Guide Popover/Modal (iOS Safari & fallback) -->
+<div
+  id="pwa-guide-modal"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="pwa-guide-title"
+  class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 p-4 backdrop-blur-sm"
+>
+  <div class="w-full max-w-md rounded-2xl border border-line bg-card p-6 shadow-2xl">
+    <div class="flex items-start justify-between gap-3">
+      <h2 id="pwa-guide-title" class="text-lg font-bold text-txt-primary">
+        {t.nav.pwaGuideTitle}
+      </h2>
+      <button
+        type="button"
+        id="pwa-guide-close-icon"
+        aria-label={t.nav.pwaGuideClose}
+        class="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg text-txt-secondary hover:bg-subtle hover:text-txt-primary"
+      >
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+    <p id="pwa-guide-desc" class="mt-3 text-sm leading-relaxed text-txt-secondary" data-installed-msg={t.nav.pwaGuideInstalled}>
+      {t.nav.pwaGuideBody}
+    </p>
+    <div class="mt-5 flex justify-end">
+      <button
+        type="button"
+        id="pwa-guide-close-btn"
+        class="inline-flex min-h-[44px] items-center justify-center rounded-xl bg-accent px-5 py-2.5 text-sm font-semibold text-accent-contrast transition-colors hover:bg-accent-hover"
+      >
+        {t.nav.pwaGuideClose}
+      </button>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    // Theme toggle
+    var themeBtn = document.getElementById('theme-toggle-btn');
+    function syncThemeAria() {
+      if (!themeBtn) return;
+      var isDark = document.documentElement.classList.contains('dark');
+      themeBtn.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+      var lightLbl = themeBtn.getAttribute('data-light-label') || 'Switch to light mode';
+      var darkLbl = themeBtn.getAttribute('data-dark-label') || 'Switch to dark mode';
+      themeBtn.setAttribute('aria-label', isDark ? lightLbl : darkLbl);
+    }
+    syncThemeAria();
+
+    if (themeBtn) {
+      themeBtn.addEventListener('click', function () {
+        var nextDark = !document.documentElement.classList.contains('dark');
+        document.documentElement.classList.toggle('dark', nextDark);
+        try {
+          localStorage.setItem('theme', nextDark ? 'dark' : 'light');
+        } catch (e) {}
+        syncThemeAria();
+        window.dispatchEvent(new CustomEvent('modelix-theme-change', { detail: { dark: nextDark } }));
+      });
+    }
+
+    // Language menu toggle
+    var langBtn = document.getElementById('lang-menu-btn');
+    var langList = document.getElementById('lang-menu-list');
+    var langRoot = document.getElementById('lang-dropdown-root');
+
+    function closeLangMenu() {
+      if (!langBtn || !langList) return;
+      langBtn.setAttribute('aria-expanded', 'false');
+      langList.classList.add('invisible', 'opacity-0', 'pointer-events-none');
+    }
+
+    function toggleLangMenu() {
+      if (!langBtn || !langList) return;
+      var expanded = langBtn.getAttribute('aria-expanded') === 'true';
+      if (expanded) {
+        closeLangMenu();
+      } else {
+        langBtn.setAttribute('aria-expanded', 'true');
+        langList.classList.remove('invisible', 'opacity-0', 'pointer-events-none');
+      }
+    }
+
+    if (langBtn) {
+      langBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        toggleLangMenu();
+      });
+    }
+
+    document.addEventListener('click', function (e) {
+      if (langRoot && !langRoot.contains(e.target)) {
+        closeLangMenu();
+      }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        closeLangMenu();
+        closePwaModal();
+      }
+    });
+
+    // Offline PWA install prompt & fallback guide modal
+    var deferredPrompt = null;
+    var pwaBtn = document.getElementById('pwa-install-btn');
+    var pwaModal = document.getElementById('pwa-guide-modal');
+    var pwaDesc = document.getElementById('pwa-guide-desc');
+    var pwaCloseBtn = document.getElementById('pwa-guide-close-btn');
+    var pwaCloseIcon = document.getElementById('pwa-guide-close-icon');
+
+    window.addEventListener('beforeinstallprompt', function (e) {
+      e.preventDefault();
+      deferredPrompt = e;
+    });
+
+    function openPwaModal() {
+      if (!pwaModal) return;
+      var isStandalone =
+        window.matchMedia('(display-mode: standalone)').matches ||
+        window.navigator.standalone === true;
+      if (isStandalone && pwaDesc) {
+        var installedMsg = pwaDesc.getAttribute('data-installed-msg');
+        if (installedMsg) pwaDesc.textContent = installedMsg;
+      }
+      pwaModal.classList.remove('hidden');
+      pwaModal.classList.add('flex');
+      if (pwaCloseBtn) pwaCloseBtn.focus();
+    }
+
+    function closePwaModal() {
+      if (!pwaModal) return;
+      pwaModal.classList.add('hidden');
+      pwaModal.classList.remove('flex');
+    }
+
+    if (pwaBtn) {
+      pwaBtn.addEventListener('click', function () {
+        if (deferredPrompt) {
+          deferredPrompt.prompt();
+          deferredPrompt.userChoice.finally(function () {
+            deferredPrompt = null;
+          });
+        } else {
+          openPwaModal();
+        }
+      });
+    }
+
+    if (pwaCloseBtn) pwaCloseBtn.addEventListener('click', closePwaModal);
+    if (pwaCloseIcon) pwaCloseIcon.addEventListener('click', closePwaModal);
+    if (pwaModal) {
+      pwaModal.addEventListener('click', function (e) {
+        if (e.target === pwaModal) closePwaModal();
+      });
+    }
+  })();
+</script>

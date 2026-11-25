@@ -1,0 +1,32 @@
+{
+  "name": "ModelixAI",
+  "short_name": "ModelixAI",
+  "description": "Interactive 3D Model Viewer & GLB/STL Inspector — Open GLB, glTF, OBJ, and STL locally in your browser.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "theme_color": "#4A6FA5",
+  "background_color": "#F7F8FA",
+  "categories": ["design", "developer tools", "graphics", "utilities"],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
