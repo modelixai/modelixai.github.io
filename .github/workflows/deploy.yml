@@ -24,15 +24,10 @@ jobs:
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
-      - name: Build static site with Astro
+      - name: Build and upload Astro site
         uses: withastro/action@v3
         with:
           node-version: 22
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./dist
 
   deploy:
     needs: build
